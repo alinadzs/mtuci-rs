@@ -1,70 +1,35 @@
-/* Вектор */
+use homework4::Vect;
 
 fn main() {
-    // Методы: new(), push().
-    let mut vec: Vec<i32> = Vec::new();
+    // пример: new, push, with_capacity
+    // адекватного вывода нет(((
+    let mut a = Vect::new([String::from("de")]); // new должен знать кол-во элементов массива во время компиляции (плохо)
+    a.push("elment".to_string());
+    println!("{:?}", a);
+    let mut a: Vect<usize, 3> = Vect::with_capacity(); // Емкость передаётся не в аргументы, а в параметр (плохо) (проблема как и с new)
+    // пример работы пуша и изменения ёмкости (увеличивается на число равное начальной ёмкости (в оригинале удваивается))
+    a.push(1);
+    a.push(2);
+    a.push(3);
+    a.push(4);
+    a.push(5);
+    println!("{}", a.capacity());
+    println!("{}", a.length());
+    println!("{}", a.get(3));
+    println!("{:?}", a);
+    *a.get_mut(0) = 100;
+    println!("{}", a.get(0));
+    println!("{}", a.pop());
+    println!("{}", a.pop());
+    a.push(7);
+    println!("{:?}", a);
+    a.resize(2, 0);
+    println!("{:?}", a);
+    a.push(3);
+    a.push(4);
+    a.push(5);
+    a.push(6);
+    println!("{}", a.remove(3));
+    println!("{:?}", a);
 
-    println!("Ёмкость: {}", vec.capacity());
-
-    vec.push(4);
-    vec.push(18);
-    vec.push(19);
-    vec.push(5);
-
-    println!("Ёмкость: {}", vec.capacity());
-    println!("Дан вектор: {vec:?}\n");
-
-    // Метод: pop().
-    let x = vec.pop();
-    match x {
-        Some(value) => println!("Последний удаленный элемент вектора: {value}."),
-        None => println!("	(`o_o´)  "),
-    }
-    println!("{vec:?}\n");
-
-    // Метод: remove().
-    let y = vec.remove(0);
-    println!("Удаленный элемент из вектора: {y}.");
-
-    println!("{vec:?}\n");
-
-    // Метод: get().
-    let second: Option<&i32> = vec.get(1);
-    match second {
-        Some(value) => println!("Второе значение в векторе: {value}.\n"),
-        None => println!("	(`0-0´)  "),
-    }
-
-    // Метод: resize().
-    let mut vec = vec![4, 5, 18, 19, 100];
-
-    println!("Дан вектор: {vec:?}");
-
-    // 1. Если увеличиваем:
-    vec.resize(7, 19);
-    println!("Увеличенный вектор: {vec:?}");
-
-    // 2. Если уменьшаем:
-    vec.resize(2, 0);
-    println!("Уменьшенный вектор: {vec:?}\n");
-
-    // Метод with_capacity():
-
-    let mut vec = Vec::with_capacity(2);
-
-    println!("Ёмкость: {}", vec.capacity());
-
-    vec.push(4);
-    vec.push(5);
-
-    println!("Вектор: {:?}, Его ёмкость: {}.", vec, vec.capacity());
-
-    vec.push(6);
-
-    println!("Вектор: {:?}, Его ёмкость: {}.", vec, vec.capacity());
-
-    vec.push(18);
-    vec.push(19);
-
-    println!("Вектор: {:?}, Его ёмкость: {}.", vec, vec.capacity());
 }

@@ -5,4 +5,5 @@ members = [
     "Dz1",
     "Dz2",
     "Dz4",
+    "my_hash_map",
 ]
